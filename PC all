@@ -1,0 +1,24 @@
+$jnt = `ls - sl`;
+$rad = 1;
+circle -n ($jnt[0] + "_Ctrl") -c 0 0 0 -nr 90 0 0 -sw 360 -r 1 -d 3 -ut 0 -tol 0.01 -s 8 -ch 1; objectMoveCommand;
+group -n ($jnt[0] + "_Ctrl_auto");
+group -n ($jnt[0] + "_Ctrl_adj");
+select -tgl $jnt ;
+parent;
+string $sel[] = `ls -sl`;
+string $obj;
+for ($obj in $sel)
+{ 
+    setAttr ($obj + ".translateX") 0;
+    setAttr ($obj + ".translateY") 0;
+    setAttr ($obj + ".translateZ") 0;
+    setAttr ($obj + ".rotateX") 0;
+    setAttr ($obj + ".rotateY") 0;
+	setAttr ($obj + ".rotateZ") 0;
+}
+parent -w ;
+pickWalk -d down;
+pickWalk -d down;
+select -tgl $jnt ;
+doCreateParentConstraintArgList 1 { "0","0","0","0","0","0","0","1","","1" } ;
+ParentConstraint -offset 0 0 0 -weight 1;
