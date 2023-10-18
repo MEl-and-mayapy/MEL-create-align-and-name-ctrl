@@ -1,0 +1,3 @@
+$obj1 = `ls -sl`;
+group -n ($obj1[0] + "_offset");
+pickWalk -d right;
