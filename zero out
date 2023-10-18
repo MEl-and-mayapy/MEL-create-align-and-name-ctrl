@@ -1,0 +1,8 @@
+string $sel[] = `ls -sl`;
+string $obj;
+for ($obj in $sel)
+{
+    setAttr ($obj + ".rotateX") 0;
+    setAttr ($obj + ".rotateY") 0;
+    setAttr ($obj + ".rotateZ") 0;
+}
