@@ -1,0 +1,15 @@
+searchReplaceNames "R" "L" "hierarchy";
+searchReplaceNames "L" "R" "hierarchy";
+searchReplaceNames "^" "R " "selected";
+searchReplaceNames "^" "L " "selected";
+psearchReplaceNames "^" "R " "selected";
+searchReplaceNames "$" "_sj " "selected";
+searchReplaceNames "$" "result " "selected";
+searchReplaceNames "Result" "FK" "selected";
+searchReplaceNames "FK" "Result" "selected";
+searchReplaceNames "IK" "Result" "selected";
+searchReplaceNames "FK" "IK" "selected";
+searchReplaceNames "IK" "FK" "selected";
+
+
+
