@@ -1,0 +1,1636 @@
+global proc shelf_Rigging_custom () {
+    global string $gBuffStr;
+    global string $gBuffStr0;
+    global string $gBuffStr1;
+
+
+    shelfButton
+        -enableCommandRepeat 1
+        -flexibleWidthType 3
+        -flexibleWidthValue 32
+        -enable 1
+        -width 35
+        -height 34
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "delete history " 
+        -enableBackground 0
+        -backgroundColor 0 0 0 
+        -highlightColor 0.321569 0.521569 0.65098 
+        -align "center" 
+        -label "Delete By Type: History" 
+        -labelOffset 0
+        -rotation 0
+        -flipX 0
+        -flipY 0
+        -useAlpha 1
+        -font "plainLabelFont" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.5 
+        -image "C:/Users/dell/Documents/maya/2019/prefs_old/icons/DeleteHis.png" 
+        -image1 "C:/Users/dell/Documents/maya/2019/prefs_old/icons/DeleteHis.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "DeleteHistory" 
+        -sourceType "mel" 
+        -commandRepeatable 1
+        -flat 1
+        -mi "nondeformer" ( "doBakeNonDefHistory( 1, {\"prePost\" });" )
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -flexibleWidthType 3
+        -flexibleWidthValue 32
+        -enable 1
+        -width 35
+        -height 34
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "freeze transform" 
+        -enableBackground 0
+        -backgroundColor 0 0 0 
+        -highlightColor 0.321569 0.521569 0.65098 
+        -align "center" 
+        -label "ft" 
+        -labelOffset 0
+        -rotation 0
+        -flipX 0
+        -flipY 0
+        -useAlpha 1
+        -font "plainLabelFont" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.5 
+        -image "C:/Users/dell/Documents/maya/2019/prefs_old/icons/FreezeTransform2.png" 
+        -image1 "C:/Users/dell/Documents/maya/2019/prefs_old/icons/FreezeTransform2.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "FreezeTransformations" 
+        -sourceType "mel" 
+        -doubleClickCommand "FreezeTransformationsOptions" 
+        -commandRepeatable 1
+        -flat 1
+        -mi "trans" ( "makeIdentity -apply true -t 1 -r 0 -s 0 -n 0 -pn 1;\n" )
+        -mi "rot" ( "print(\"User defined menuItem\");" )
+        -mi "scale" ( "makeIdentity -apply true -t 0 -r 0 -s 1 -n 0 -pn 1;\n" )
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -flexibleWidthType 3
+        -flexibleWidthValue 32
+        -enable 1
+        -width 35
+        -height 34
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "CenterPivot" 
+        -enableBackground 0
+        -backgroundColor 0 0 0 
+        -highlightColor 0.321569 0.521569 0.65098 
+        -align "center" 
+        -label "CenterPivot" 
+        -labelOffset 0
+        -rotation 0
+        -flipX 0
+        -flipY 0
+        -useAlpha 1
+        -font "plainLabelFont" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.5 
+        -image "C:/Users/dell/Documents/maya/2019/prefs_old/icons/CentrePivot.png" 
+        -image1 "C:/Users/dell/Documents/maya/2019/prefs_old/icons/CentrePivot.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "CenterPivot" 
+        -sourceType "mel" 
+        -commandRepeatable 1
+        -flat 1
+    ;
+    separator
+        -enable 1
+        -width 12
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -enableBackground 0
+        -backgroundColor 0 0 0 
+        -highlightColor 0.321569 0.521569 0.65098 
+        -style "shelf" 
+        -horizontal 0
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -flexibleWidthType 3
+        -flexibleWidthValue 32
+        -enable 1
+        -width 35
+        -height 34
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "LocAt" 
+        -enableBackground 0
+        -backgroundColor 0 0 0 
+        -highlightColor 0.321569 0.521569 0.65098 
+        -align "center" 
+        -label "locAt" 
+        -labelOffset 0
+        -rotation 0
+        -flipX 0
+        -flipY 0
+        -useAlpha 1
+        -font "plainLabelFont" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.5 
+        -image "locator.svg" 
+        -image1 "locator.svg" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "$jnt = `ls -sl` ;\nspaceLocator -n ($jnt[0] + \"_Loc\") ;\nselect -tgl $jnt ;\nparent;\nstring $sel[] = `ls -sl`;\nstring $obj;\nfor ($obj in $sel)\n{ \n    setAttr ($obj + \".translateX\") 0;\n    setAttr ($obj + \".translateY\") 0;\n    setAttr ($obj + \".translateZ\") 0;\n    setAttr ($obj + \".rotateY\") 0;\n    setAttr ($obj + \".rotateZ\") 0; \n}\npickWalk -d up;\npickWalk -d down;\n" 
+        -sourceType "mel" 
+        -doubleClickCommand "$jnt = `ls -sl` ;\nspaceLocator -n ($jnt[0] + \"_Loc\") ;\nselect -tgl $jnt ;\nparent;\nstring $sel[] = `ls -sl`;\nstring $obj;\nfor ($obj in $sel)\n{ \n    setAttr ($obj + \".translateX\") 0;\n    setAttr ($obj + \".translateY\") 0;\n    setAttr ($obj + \".translateZ\") 0;\n    setAttr ($obj + \".rotateY\") 0;\n    setAttr ($obj + \".rotateZ\") 0; \n}\nparent -w;" 
+        -commandRepeatable 1
+        -flat 1
+        -mi "DistanceTool" ( "DistanceTool" )
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -flexibleWidthType 3
+        -flexibleWidthValue 32
+        -enable 1
+        -width 35
+        -height 34
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "create a ctrl" 
+        -enableBackground 0
+        -backgroundColor 0 0 0 
+        -highlightColor 0.321569 0.521569 0.65098 
+        -align "center" 
+        -label "nurbs curve" 
+        -labelOffset 0
+        -rotation 0
+        -flipX 0
+        -flipY 0
+        -useAlpha 1
+        -font "plainLabelFont" 
+        -overlayLabelColor 0.752778 0.752778 0.752778 
+        -overlayLabelBackColor 0.744444 0.744444 0.744444 0.5 
+        -image "H:/icons/nurbs circle.png" 
+        -image1 "H:/icons/nurbs circle.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "$jnt = `ls - sl`;\n$rad = 1;\ncircle -n ($jnt[0] + \"_Ctrl\") -c 0 0 0 -nr 90 0 0 -sw 360 -r 5 -d 3 -ut 0 -tol 0.01 -s 8 -ch 1; objectMoveCommand;\ngroup -n ($jnt[0] + \"_Ctrl_auto\");\ngroup -n ($jnt[0] + \"_Ctrl_offs\");\nselect -tgl $jnt ;\nparent;\nstring $sel[] = `ls -sl`;\nstring $obj;\nfor ($obj in $sel)\n{ \n    setAttr ($obj + \".translateX\") 0;\n    setAttr ($obj + \".translateY\") 0;\n    setAttr ($obj + \".translateZ\") 0;\n    setAttr ($obj + \".rotateX\") 0;\n    setAttr ($obj + \".rotateY\") 0;\n    setAttr ($obj + \".rotateZ\") 0; \n}\nparent -w ;\npickWalk -d down;\npickWalk -d down;\npickWalk -d down;\nselect -tgl $jnt;\nparent -r -s;\nselect $jnt;\npickWalk -d down;" 
+        -sourceType "mel" 
+        -doubleClickCommand "$jnt = `ls - sl`;\n$rad = 1;\ncircle -n ($jnt[0] + \"_Ctrl\") -c 0 0 0 -nr 0 90 0 -sw 360 -r 10 -d 3 -ut 0 -tol 0.01 -s 8 -ch 1; objectMoveCommand;\ngroup -n ($jnt[0] + \"_Ctrl_auto\");\ngroup -n ($jnt[0] + \"_Ctrl_offs\");\nselect -tgl $jnt ;\nparent;\nstring $sel[] = `ls -sl`;\nstring $obj;\nfor ($obj in $sel)\n{ \n    setAttr ($obj + \".translateX\") 0;\n    setAttr ($obj + \".translateY\") 0;\n    setAttr ($obj + \".translateZ\") 0;\n    setAttr ($obj + \".rotateX\") 0;\n    setAttr ($obj + \".rotateY\") 0;\n    setAttr ($obj + \".rotateZ\") 0; \n}\nparent -w ;\npickWalk -d down;\npickWalk -d down;\nselect -tgl $jnt;\n" 
+        -commandRepeatable 1
+        -flat 1
+        -mi "interactive toggle" ( "ToggleCreateNurbsPrimitivesAsTool;\nCreateNURBSCircle;\nToggleCreateNurbsPrimitivesAsTool;" )
+        -mi "create_at_X" ( "$jnt = `ls - sl`;\n$rad = 1;\ncircle -n ($jnt[0] + \"_Ctrl\") -c 0 0 0 -nr 90 0 0 -sw 360 -r $rad -d 3 -ut 0 -tol 0.01 -s 8 -ch 1; objectMoveCommand;\nselect -tgl $jnt ;\nparent;\nstring $sel[] = `ls -sl`;\nstring $obj;\nfor ($obj in $sel)\n{ \n    setAttr ($obj + \".translateX\") 0;\n    setAttr ($obj + \".translateY\") 0;\n    setAttr ($obj + \".translateZ\") 0;\n    setAttr ($obj + \".rotateX\") 0;\n    setAttr ($obj + \".rotateY\") 0;\n    setAttr ($obj + \".rotateZ\") 0; \n}\nparent -w ;\npickWalk -d down ;" )
+        -mi "create_at_Y" ( "$jnt = `ls - sl`;\n$rad = 1;\ncircle -n ($jnt[0] + \"_Ctrl\") -c 0 0 0 -nr 0 90 0 -sw 360 -r $rad -d 3 -ut 0 -tol 0.01 -s 8 -ch 1; objectMoveCommand;\nselect -tgl $jnt ;\nparent;\nstring $sel[] = `ls -sl`;\nstring $obj;\nfor ($obj in $sel)\n{ \n    setAttr ($obj + \".translateX\") 0;\n    setAttr ($obj + \".translateY\") 0;\n    setAttr ($obj + \".translateZ\") 0;\n    setAttr ($obj + \".rotateX\") 0;\n    setAttr ($obj + \".rotateY\") 0;\n    setAttr ($obj + \".rotateZ\") 0; \n}\nparent -w ;\npickWalk -d down ;" )
+        -mi "create_at_Z" ( "$jnt = `ls - sl`;\n$rad = 1;\ncircle -n ($jnt[0] + \"_Ctrl\") -c 0 0 0 -nr 0 0 90 -sw 360 -r $rad -d 3 -ut 0 -tol 0.01 -s 8 -ch 1; objectMoveCommand;\nselect -tgl $jnt ;\nparent;\nstring $sel[] = `ls -sl`;\nstring $obj;\nfor ($obj in $sel)\n{ \n    setAttr ($obj + \".translateX\") 0;\n    setAttr ($obj + \".translateY\") 0;\n    setAttr ($obj + \".translateZ\") 0;\n    setAttr ($obj + \".rotateX\") 0;\n    setAttr ($obj + \".rotateY\") 0;\n    setAttr ($obj + \".rotateZ\") 0; \n}\nparent -w ;\npickWalk -d down ;" )
+        -mi "create_at_Z with offs" ( "$jnt = `ls - sl`;\n$rad = 1;\ncircle -n ($jnt[0] + \"_Ctrl\") -c 0 0 0 -nr 0 0 90 -sw 360 -r 5 -d 3 -ut 0 -tol 0.01 -s 8 -ch 1; objectMoveCommand;\ngroup -n ($jnt[0] + \"_Ctrl_auto\");\ngroup -n ($jnt[0] + \"_Ctrl_offs\");\nselect -tgl $jnt ;\nparent;\nstring $sel[] = `ls -sl`;\nstring $obj;\nfor ($obj in $sel)\n{ \n    setAttr ($obj + \".translateX\") 0;\n    setAttr ($obj + \".translateY\") 0;\n    setAttr ($obj + \".translateZ\") 0;\n    setAttr ($obj + \".rotateX\") 0;\n    setAttr ($obj + \".rotateY\") 0;\n    setAttr ($obj + \".rotateZ\") 0; \n}\nparent -w ;\npickWalk -d down;\npickWalk -d down;\nselect -tgl $jnt;\n" )
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -flexibleWidthType 3
+        -flexibleWidthValue 32
+        -enable 1
+        -width 35
+        -height 34
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Create a curve on the grid or live surface specifying edit points" 
+        -enableBackground 0
+        -backgroundColor 0 0 0 
+        -highlightColor 0.321569 0.521569 0.65098 
+        -align "center" 
+        -label "EP Curve Tool" 
+        -labelOffset 0
+        -rotation 0
+        -flipX 0
+        -flipY 0
+        -useAlpha 1
+        -font "plainLabelFont" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.5 
+        -image "curveEP.png" 
+        -image1 "curveEP.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "EPCurveTool" 
+        -sourceType "mel" 
+        -doubleClickCommand "EPCurveToolOptions" 
+        -commandRepeatable 1
+        -flat 1
+        -mi "BezierCurve" ( "CreateBezierCurveTool" )
+        -mi "insert knot" ( "InsertKnot" )
+    ;
+    separator
+        -enable 1
+        -width 12
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -enableBackground 0
+        -backgroundColor 0 0 0 
+        -highlightColor 0.321569 0.521569 0.65098 
+        -style "shelf" 
+        -horizontal 0
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -flexibleWidthType 3
+        -flexibleWidthValue 32
+        -enable 1
+        -width 35
+        -height 34
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Hide the selected object(s)" 
+        -enableBackground 0
+        -backgroundColor 0 0 0 
+        -highlightColor 0.321569 0.521569 0.65098 
+        -align "center" 
+        -label "Hide Selection" 
+        -labelOffset 0
+        -rotation 0
+        -flipX 0
+        -flipY 0
+        -useAlpha 1
+        -font "plainLabelFont" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.5 
+        -image "C:/Users/dell/Documents/maya/2019/prefs_old/icons/hidden3c.png" 
+        -image1 "C:/Users/dell/Documents/maya/2019/prefs_old/icons/hidden3c.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "HideSelectedObjects" 
+        -sourceType "mel" 
+        -doubleClickCommand "ShowSelectedObjects" 
+        -commandRepeatable 1
+        -flat 1
+        -mi "joints on" ( "modelEditor -e -joints true `getPanel -wf`;" )
+        -mi "joints off" ( "modelEditor -e -joints false `getPanel -wf`;" )
+        -mi "polygons on" ( "modelEditor -e -polymeshes true `getPanel -wf`;" )
+        -mi "polygons off" ( "modelEditor -e -polymeshes false `getPanel -wf`;" )
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -flexibleWidthType 2
+        -flexibleWidthValue 24
+        -enable 1
+        -width 24
+        -height 34
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Click to place joint, click on existing joint to add to skeleton, click/drag to position joint" 
+        -enableBackground 0
+        -backgroundColor 0 0 0 
+        -highlightColor 0.321569 0.521569 0.65098 
+        -align "center" 
+        -label "Create Joints" 
+        -labelOffset 0
+        -rotation 0
+        -flipX 0
+        -flipY 0
+        -useAlpha 1
+        -font "plainLabelFont" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.5 
+        -image "kinJoint.png" 
+        -image1 "kinJoint.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "JointTool ;\nToggleLocalRotationAxes ;" 
+        -sourceType "mel" 
+        -doubleClickCommand "$object = `ls -sl`;\njoint -n ($object[0] + \"_jt\") ;\nselect -tgl $object ;\nmatchTransform;\nselect $object;\npickWalk -d left; " 
+        -commandRepeatable 1
+        -flat 1
+        -mi "joint_displaySize" ( "JdsWin" )
+        -mi "mirrorJoint" ( "mirrorJoint -mirrorYZ -mirrorBehavior -searchReplace \"L\" \"R\"" )
+        -mi "mirrorJointOptions" ( "mirrorJointOptions" )
+        -mi "select hierarchy;" ( "select -hi;" )
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -flexibleWidthType 2
+        -flexibleWidthValue 24
+        -enable 1
+        -width 24
+        -height 34
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Mirror skin weights options" 
+        -enableBackground 0
+        -backgroundColor 0 0 0 
+        -highlightColor 0.321569 0.521569 0.65098 
+        -align "center" 
+        -label "mirrorSkinWeightsDialog" 
+        -labelOffset 0
+        -rotation 0
+        -flipX 0
+        -flipY 0
+        -useAlpha 1
+        -font "plainLabelFont" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.5 
+        -image "mirrorSkinWeight.png" 
+        -image1 "mirrorSkinWeight.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "MirrorSkinWeightsOptions" 
+        -sourceType "mel" 
+        -commandRepeatable 1
+        -flat 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -flexibleWidthType 2
+        -flexibleWidthValue 24
+        -enable 1
+        -width 24
+        -height 34
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Orient joint options" 
+        -enableBackground 0
+        -backgroundColor 0 0 0 
+        -highlightColor 0.321569 0.521569 0.65098 
+        -align "center" 
+        -label "orientJointOptionItem" 
+        -labelOffset 0
+        -rotation 0
+        -flipX 0
+        -flipY 0
+        -useAlpha 1
+        -font "plainLabelFont" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.5 
+        -image "orientJoint.png" 
+        -image1 "orientJoint.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "OrientJointOptions;" 
+        -sourceType "mel" 
+        -doubleClickCommand "joint -e  -oj none;" 
+        -commandRepeatable 1
+        -flat 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -flexibleWidthType 3
+        -flexibleWidthValue 32
+        -enable 1
+        -width 35
+        -height 34
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Toggle local rotation axis visibility" 
+        -enableBackground 0
+        -backgroundColor 0 0 0 
+        -highlightColor 0.321569 0.521569 0.65098 
+        -align "center" 
+        -label "Local Rotation Axes" 
+        -labelOffset 0
+        -rotation 0
+        -flipX 0
+        -flipY 0
+        -useAlpha 1
+        -font "plainLabelFont" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.5 
+        -image "question.png" 
+        -image1 "question.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "ToggleLocalRotationAxes" 
+        -sourceType "mel" 
+        -commandRepeatable 1
+        -flat 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -flexibleWidthType 3
+        -flexibleWidthValue 32
+        -enable 1
+        -width 35
+        -height 34
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Create IK Handle: Create IK handle on joint chain" 
+        -enableBackground 0
+        -backgroundColor 0 0 0 
+        -highlightColor 0.321569 0.521569 0.65098 
+        -align "center" 
+        -label "Create IK Handle" 
+        -labelOffset 0
+        -rotation 0
+        -flipX 0
+        -flipY 0
+        -useAlpha 1
+        -font "plainLabelFont" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.5 
+        -image "kinHandle.png" 
+        -image1 "kinHandle.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "IKHandleTool" 
+        -sourceType "mel" 
+        -doubleClickCommand "IKHandleToolOptions" 
+        -commandRepeatable 1
+        -flat 1
+        -mi "CreateIKSplineTool" ( "IKSplineHandleTool" )
+        -mi "SingleChainSolver" ( "ikHandle -sol ikSCSolver;" )
+        -mi "SpringSolver" ( "ikHandle -sol ikSpringSolver;" )
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -flexibleWidthType 3
+        -flexibleWidthValue 32
+        -enable 1
+        -width 35
+        -height 34
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Paint skin weights tool options" 
+        -enableBackground 0
+        -backgroundColor 0 0 0 
+        -highlightColor 0.321569 0.521569 0.65098 
+        -align "center" 
+        -label "skinWeightPaintDialogItem" 
+        -labelOffset 0
+        -rotation 0
+        -flipX 0
+        -flipY 0
+        -useAlpha 1
+        -font "plainLabelFont" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.5 
+        -image "paintSkinWeights.png" 
+        -image1 "paintSkinWeights.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "ArtPaintSkinWeightsToolOptions" 
+        -sourceType "mel" 
+        -doubleClickCommand "ComponentEditor" 
+        -commandRepeatable 1
+        -flat 1
+        -mi "MirrorSkinWeights" ( "MirrorSkinWeights" )
+        -mi "PaintClusterWeightsTool" ( "PaintClusterWeightsToolOptions" )
+        -mi "ArtPaintBlendShapeWeightsTool" ( "ArtPaintBlendShapeWeightsTool" )
+    ;
+    separator
+        -enable 1
+        -width 12
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -enableBackground 0
+        -backgroundColor 0 0 0 
+        -highlightColor 0.321569 0.521569 0.65098 
+        -style "shelf" 
+        -horizontal 0
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -flexibleWidthType 2
+        -flexibleWidthValue 16
+        -enable 1
+        -width 16
+        -height 34
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "NE GE Sarn CC" 
+        -enableBackground 0
+        -backgroundColor 0 0 0 
+        -highlightColor 0.321569 0.521569 0.65098 
+        -align "center" 
+        -label "NE GE Sarn CC" 
+        -labelOffset 0
+        -rotation 0
+        -flipX 0
+        -flipY 0
+        -useAlpha 1
+        -font "plainLabelFont" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.5 
+        -image "nodeGrapherModeAllLarge.png" 
+        -image1 "nodeGrapherModeAllLarge.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "NodeEditorWindow" 
+        -sourceType "mel" 
+        -doubleClickCommand "GraphEditor" 
+        -commandRepeatable 1
+        -flat 1
+        -mi "plusMInusAverage" ( "createNode plusMinusAverage;" )
+        -mi "MultiplyDIvide" ( "createNode multiplyDivide;" )
+        -mi "multDoubleLinear" ( "createNode multDoubleLinear;" )
+        -mi "blendColors" ( "createNode blendColors;" )
+        -mi "condition" ( "createNode condition;" )
+        -mi "Reverse" ( "createNode reverse;" )
+        -mi "Channel Control" ( "ChannelControlEditor" )
+        -mi "Component Editor" ( "ComponentEditor" )
+        -mi "ExpressionEditor" ( "ExpressionEditor" )
+        -mi "ConnectionEditor" ( "ConnectionEditor" )
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -flexibleWidthType 3
+        -flexibleWidthValue 32
+        -enable 1
+        -width 35
+        -height 34
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "User Script" 
+        -enableBackground 0
+        -backgroundColor 0 0 0 
+        -highlightColor 0.321569 0.521569 0.65098 
+        -align "center" 
+        -label "SARN" 
+        -labelOffset 0
+        -rotation 0
+        -flipX 0
+        -flipY 0
+        -useAlpha 1
+        -font "plainLabelFont" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.5 
+        -image "C:/Users/dell/Documents/maya/2019/prefs_old/icons/SaRN.png" 
+        -image1 "C:/Users/dell/Documents/maya/2019/prefs_old/icons/SaRN.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "SearchAndReplaceNames" 
+        -sourceType "mel" 
+        -doubleClickCommand "PrefixHierarchyNames" 
+        -commandRepeatable 1
+        -flat 1
+        -mi "search and replace R to L" ( "searchReplaceNames \"R\" \"L\" \"hierarchy\";" )
+        -mi "search and replace L to R" ( "searchReplaceNames \"L\" \"R\" \"hierarchy\";" )
+        -mi "add prefix R" ( "searchReplaceNames \"^\" \"R \" \"selected\";" )
+        -mi "add prefix L" ( "searchReplaceNames \"^\" \"L \" \"selected\";" )
+        -mi "add prefix R arm" ( "psearchReplaceNames \"^\" \"R Arm\" \"selected\";" )
+        -mi "add prefix R Leg " ( "searchReplaceNames \"^\" \"R Leg\" \"selected\";" )
+        -mi "add prefix L Arm" ( "searchReplaceNames \"^\" \"L Arm\" \"selected\";" )
+        -mi "add prefix L Leg" ( "searchReplaceNames \"^\" \"L Leg\" \"selected\";" )
+        -mi "add suffix R" ( "searchReplaceNames \"$\" \"R \" \"selected\";" )
+        -mi "add suffix L" ( "searchReplaceNames \"$\" \"L \" \"selected\";" )
+        -mi "add suffix sj" ( "searchReplaceNames \"$\" \"_sj \" \"selected\";" )
+        -mi "add suffix Result" ( "searchReplaceNames \"$\" \"result \" \"selected\";" )
+        -mi "add suffix offset" ( "searchReplaceNames \"$\" \"offset \" \"selected\";" )
+        -mi "add suffix auto" ( "searchReplaceNames \"$\" \"auto \" \"selected\";" )
+        -mi "result to fk" ( "searchReplaceNames \"Result\" \"FK\" \"selected\";" )
+        -mi "fk  to ik" ( "searchReplaceNames \"FK\" \"IK\" \"selected\";" )
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -flexibleWidthType 3
+        -flexibleWidthValue 32
+        -enable 1
+        -width 35
+        -height 34
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Set Driven Key: Set driven key options" 
+        -enableBackground 0
+        -backgroundColor 0 0 0 
+        -highlightColor 0.321569 0.521569 0.65098 
+        -align "center" 
+        -label "Set Driven Key" 
+        -labelOffset 0
+        -rotation 0
+        -flipX 0
+        -flipY 0
+        -useAlpha 1
+        -font "plainLabelFont" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.5 
+        -image "setDrivenKeyframe.png" 
+        -image1 "setDrivenKeyframe.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -version "2016" 
+        -command "SetDrivenKeyOptions" 
+        -sourceType "mel" 
+        -doubleClickCommand "SetDrivenKeyOptions" 
+        -commandRepeatable 1
+        -flat 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -flexibleWidthType 3
+        -flexibleWidthValue 31
+        -enable 1
+        -width 34
+        -height 34
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "matchPivots" 
+        -enableBackground 0
+        -backgroundColor 0 0 0 
+        -highlightColor 0.321569 0.521569 0.65098 
+        -align "center" 
+        -label "matchPivots" 
+        -labelOffset 0
+        -rotation 0
+        -flipX 0
+        -flipY 0
+        -useAlpha 1
+        -font "plainLabelFont" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.5 
+        -image "pivotResetAlign.png" 
+        -image1 "pivotResetAlign.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "MatchPivots" 
+        -sourceType "mel" 
+        -commandRepeatable 1
+        -flat 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -flexibleWidthType 3
+        -flexibleWidthValue 38
+        -enable 1
+        -width 41
+        -height 34
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "align" 
+        -enableBackground 0
+        -backgroundColor 0 0 0 
+        -highlightColor 0.321569 0.521569 0.65098 
+        -align "center" 
+        -label "align" 
+        -labelOffset 0
+        -rotation 0
+        -flipX 0
+        -flipY 0
+        -useAlpha 1
+        -font "plainLabelFont" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.5 
+        -image "pivotAlign.png" 
+        -image1 "pivotAlign.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "MatchTranslation;" 
+        -sourceType "mel" 
+        -doubleClickCommand "MatchRotation;" 
+        -commandRepeatable 1
+        -flat 1
+        -mi "MatchPivots" ( "MatchPivots" )
+        -mi "arcLen" ( "arclen -ch on;\ngetAttr curveInfo1.arcLength;" )
+    ;
+    separator
+        -enable 1
+        -width 12
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -enableBackground 0
+        -backgroundColor 0 0 0 
+        -highlightColor 0.321569 0.521569 0.65098 
+        -style "shelf" 
+        -horizontal 0
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -flexibleWidthType 2
+        -flexibleWidthValue 24
+        -enable 1
+        -width 24
+        -height 34
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Parent Constraint: Constrain one object to the position/orientation/scale of another." 
+        -enableBackground 0
+        -backgroundColor 0 0 0 
+        -highlightColor 0.321569 0.521569 0.65098 
+        -align "center" 
+        -label "Parent Constraint" 
+        -labelOffset 0
+        -rotation 0
+        -flipX 0
+        -flipY 0
+        -useAlpha 1
+        -font "plainLabelFont" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.5 
+        -image "parentConstraint.png" 
+        -image1 "parentConstraint.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "ParentConstraint" 
+        -sourceType "mel" 
+        -doubleClickCommand "ParentConstraintOptions" 
+        -commandRepeatable 1
+        -flat 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -flexibleWidthType 2
+        -flexibleWidthValue 24
+        -enable 1
+        -width 24
+        -height 34
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Point Constraint: Constrain one object to the position of another." 
+        -enableBackground 0
+        -backgroundColor 0 0 0 
+        -highlightColor 0.321569 0.521569 0.65098 
+        -align "center" 
+        -label "Point Constraint" 
+        -labelOffset 0
+        -rotation 0
+        -flipX 0
+        -flipY 0
+        -useAlpha 1
+        -font "plainLabelFont" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.5 
+        -image "posConstraint.png" 
+        -image1 "posConstraint.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "PointConstraint" 
+        -sourceType "mel" 
+        -doubleClickCommand "PointConstraintOptions" 
+        -commandRepeatable 1
+        -flat 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -flexibleWidthType 2
+        -flexibleWidthValue 24
+        -enable 1
+        -width 24
+        -height 34
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Orient Constraint: Constrain one object to the orientation of another." 
+        -enableBackground 0
+        -backgroundColor 0 0 0 
+        -highlightColor 0.321569 0.521569 0.65098 
+        -align "center" 
+        -label "Orient Constraint" 
+        -labelOffset 0
+        -rotation 0
+        -flipX 0
+        -flipY 0
+        -useAlpha 1
+        -font "plainLabelFont" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.5 
+        -image "orientConstraint.png" 
+        -image1 "orientConstraint.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "OrientConstraint" 
+        -sourceType "mel" 
+        -doubleClickCommand "OrientConstraintOptions" 
+        -commandRepeatable 1
+        -flat 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -flexibleWidthType 2
+        -flexibleWidthValue 24
+        -enable 1
+        -width 24
+        -height 34
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Aim Constraint: Constrain one mesh to always point towards another." 
+        -enableBackground 0
+        -backgroundColor 0 0 0 
+        -highlightColor 0.321569 0.521569 0.65098 
+        -align "center" 
+        -label "Aim Constraint" 
+        -labelOffset 0
+        -rotation 0
+        -flipX 0
+        -flipY 0
+        -useAlpha 1
+        -font "plainLabelFont" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.5 
+        -image "aimConstraint.png" 
+        -image1 "aimConstraint.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "AimConstraint" 
+        -sourceType "mel" 
+        -doubleClickCommand "AimConstraintOptions" 
+        -commandRepeatable 1
+        -flat 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -flexibleWidthType 2
+        -flexibleWidthValue 24
+        -enable 1
+        -width 24
+        -height 34
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Pole Vector Constraint: Constrain the end of an IK handle to follow the position of an object." 
+        -enableBackground 0
+        -backgroundColor 0 0 0 
+        -highlightColor 0.321569 0.521569 0.65098 
+        -align "center" 
+        -label "Pole Vector Constraint" 
+        -labelOffset 0
+        -rotation 0
+        -flipX 0
+        -flipY 0
+        -useAlpha 1
+        -font "plainLabelFont" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.5 
+        -image "poleVectorConstraint.png" 
+        -image1 "poleVectorConstraint.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "PoleVectorConstraint" 
+        -sourceType "mel" 
+        -doubleClickCommand "PoleVectorConstraintOptions" 
+        -commandRepeatable 1
+        -flat 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -flexibleWidthType 2
+        -flexibleWidthValue 32
+        -enable 1
+        -width 32
+        -height 34
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Create Cluster: Deform a group of components or objects together." 
+        -enableBackground 0
+        -backgroundColor 0 0 0 
+        -highlightColor 0.321569 0.521569 0.65098 
+        -align "center" 
+        -label "Create Cluster" 
+        -labelOffset 0
+        -rotation 0
+        -flipX 0
+        -flipY 0
+        -useAlpha 1
+        -font "plainLabelFont" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.5 
+        -image "cluster.png" 
+        -image1 "cluster.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -version "2016" 
+        -command "newCluster \" -relative -envelope 1\";" 
+        -sourceType "mel" 
+        -doubleClickCommand "CreateClusterOptions" 
+        -commandRepeatable 1
+        -flat 1
+    ;
+    separator
+        -enable 1
+        -width 12
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -enableBackground 0
+        -backgroundColor 0 0 0 
+        -highlightColor 0.321569 0.521569 0.65098 
+        -style "shelf" 
+        -horizontal 0
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -flexibleWidthType 3
+        -flexibleWidthValue 32
+        -enable 1
+        -width 35
+        -height 34
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "User Script" 
+        -enableBackground 0
+        -backgroundColor 0 0 0 
+        -highlightColor 0.321569 0.521569 0.65098 
+        -align "center" 
+        -label "parent" 
+        -labelOffset 0
+        -rotation 0
+        -flipX 0
+        -flipY 0
+        -useAlpha 1
+        -font "plainLabelFont" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.5 
+        -image "C:/Users/dell/Documents/maya/2019/prefs_old/icons/link3.png" 
+        -image1 "C:/Users/dell/Documents/maya/2019/prefs_old/icons/link3.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "parent ;" 
+        -sourceType "mel" 
+        -doubleClickCommand "parent -w" 
+        -commandRepeatable 1
+        -flat 1
+        -mi "ShapeNode " ( "parent -r -s;" )
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -flexibleWidthType 3
+        -flexibleWidthValue 32
+        -enable 1
+        -width 35
+        -height 34
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "User Script" 
+        -enableBackground 0
+        -backgroundColor 0 0 0 
+        -highlightColor 0.321569 0.521569 0.65098 
+        -align "center" 
+        -label "zero PR" 
+        -labelOffset 0
+        -rotation 0
+        -flipX 0
+        -flipY 0
+        -useAlpha 1
+        -font "plainLabelFont" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.5 
+        -image "H:/icons/qa love.ico" 
+        -image1 "H:/icons/qa love.ico" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "string $sel[] = `ls -sl`;\nstring $obj;\nfor ($obj in $sel)\n{\n    setAttr ($obj + \".rotateX\") 0;\n    setAttr ($obj + \".rotateY\") 0;\n    setAttr ($obj + \".rotateZ\") 0;\n}" 
+        -sourceType "mel" 
+        -doubleClickCommand "string $sel[] = `ls -sl`;\nstring $obj;\nfor ($obj in $sel)\n{\n    setAttr ($obj + \".translateX\") 0;   \n\tsetAttr ($obj + \".translateY\") 0;   \n\tsetAttr ($obj + \".translateZ\") 0;\n}" 
+        -commandRepeatable 1
+        -flat 1
+        -mi "TranslateX" ( "string $sel[] = `ls -sl`;\nstring $obj;\nfor ($obj in $sel)\n{\n    setAttr ($obj + \".translateX\") 0;   \n}" )
+        -mi "TranslateY" ( "string $sel[] = `ls -sl`;\nstring $obj;\nfor ($obj in $sel)\n{\n    setAttr ($obj + \".translateY\") 0;   \n}" )
+        -mi "TranslateZ" ( "string $sel[] = `ls -sl`;\nstring $obj;\nfor ($obj in $sel)\n{\n    setAttr ($obj + \".translateZ\") 0;   \n}" )
+        -mi "rotateX" ( "string $sel[] = `ls -sl`;\nstring $obj;\nfor ($obj in $sel)\n{\n    setAttr ($obj + \".rotateX\") 0;   \n}" )
+        -mi "roatateY" ( "string $sel[] = `ls -sl`;\nstring $obj;\nfor ($obj in $sel)\n{\n    setAttr ($obj + \".rotateY\") 0;   \n}" )
+        -mi "rotateZ" ( "string $sel[] = `ls -sl`;\nstring $obj;\nfor ($obj in $sel)\n{\n    setAttr ($obj + \".rotateZ\") 0;   \n}" )
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -flexibleWidthType 3
+        -flexibleWidthValue 32
+        -enable 1
+        -width 35
+        -height 34
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "User Script" 
+        -enableBackground 0
+        -backgroundColor 0 0 0 
+        -highlightColor 0.321569 0.521569 0.65098 
+        -align "center" 
+        -label "create constrained control" 
+        -labelOffset 0
+        -rotation 0
+        -flipX 0
+        -flipY 0
+        -useAlpha 1
+        -font "plainLabelFont" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.5 
+        -image "C:/Users/dell/Documents/maya/2019/prefs_old/icons/align6f.png" 
+        -image1 "C:/Users/dell/Documents/maya/2019/prefs_old/icons/align6f.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "$jnt = `ls - sl`;\n$rad = 1;\ncircle -n ($jnt[0] + \"_Ctrl\") -c 0 0 0 -nr 0 0 0 -sw 360 -r 10 -d 3 -ut 0 -tol 0.01 -s 8 -ch 1; objectMoveCommand;\ngroup -n ($jnt[0] + \"_Ctrl_auto\");\ngroup -n ($jnt[0] + \"_Ctrl_adj\");\nselect -tgl $jnt ;\nparent;\nstring $sel[] = `ls -sl`;\nstring $obj;\nfor ($obj in $sel)\n{ \n    setAttr ($obj + \".translateX\") 0;\n    setAttr ($obj + \".translateY\") 0;\n    setAttr ($obj + \".translateZ\") 0;\n    setAttr ($obj + \".rotateX\") 0;\n    setAttr ($obj + \".rotateY\") 0;\n    setAttr ($obj + \".rotateZ\") 0; \n}\nparent -w ;\npickWalk -d down;\npickWalk -d down;\nselect -tgl $jnt;\ndoCreateOrientConstraintArgList 1 { \"0\",\"0\",\"0\",\"0\",\"0\",\"0\",\"0\",\"1\",\"\",\"1\" };\norientConstraint -offset 0 0 0 -weight 1;\nselect $jnt;\npickWalk -d down;" 
+        -sourceType "mel" 
+        -doubleClickCommand "$jnt = `ls - sl`;\n$rad = 1;\ncircle -n ($jnt[0] + \"_Ctrl\") -c 0 0 0 -nr 90 0 0 -sw 360 -r 0.3 -d 3 -ut 0 -tol 0.01 -s 8 -ch 1; objectMoveCommand;\ngroup -n ($jnt[0] + \"_Ctrl_auto\");\ngroup -n ($jnt[0] + \"_Ctrl_adj\");\nselect -tgl $jnt ;\nparent;\nstring $sel[] = `ls -sl`;\nstring $obj;\nfor ($obj in $sel)\n{ \n    setAttr ($obj + \".translateX\") 0;\n    setAttr ($obj + \".translateY\") 0;\n    setAttr ($obj + \".translateZ\") 0;\n    setAttr ($obj + \".rotateX\") 0;\n    setAttr ($obj + \".rotateY\") 0;\n    setAttr ($obj + \".rotateZ\") 0; \n}\nparent -w ;\npickWalk -d down;\npickWalk -d down;\nselect -tgl $jnt;\ndoCreatepointConstraintArgList 1 { \"0\",\"0\",\"0\",\"0\",\"0\",\"0\",\"0\",\"1\",\"\",\"1\" };\npointConstraint -offset 0 0 0 -weight 1;\nselect $jnt;\npickWalk -d down;" 
+        -commandRepeatable 1
+        -flat 1
+        -mi "create only at X" ( "$jnt = `ls - sl`;\n$rad = 1;\ncircle -n ($jnt[0] + \"_Ctrl\") -c 0 0 0 -nr 90 0 0 -sw 360 -r 1 -d 3 -ut 0 -tol 0.01 -s 8 -ch 1; objectMoveCommand;\ngroup -n ($jnt[0] + \"_Ctrl_auto\");\ngroup -n ($jnt[0] + \"_Ctrl_adj\");\nselect -tgl $jnt ;\nparent;\nstring $sel[] = `ls -sl`;\nstring $obj;\nfor ($obj in $sel)\n{ \n    setAttr ($obj + \".translateX\") 0;\n    setAttr ($obj + \".translateY\") 0;\n    setAttr ($obj + \".translateZ\") 0;\n    setAttr ($obj + \".rotateY\") 0;\n    setAttr ($obj + \".rotateZ\") 0; \n}\nparent -w ;\npickWalk -d down;\npickWalk -d down;" )
+        -mi "create only at Y" ( "$jnt = `ls - sl`;\n$rad = 1;\ncircle -n ($jnt[0] + \"_Ctrl\") -c 0 0 0 -nr 90 0 0 -sw 360 -r 1 -d 3 -ut 0 -tol 0.01 -s 8 -ch 1; objectMoveCommand;\ngroup -n ($jnt[0] + \"_Ctrl_auto\");\ngroup -n ($jnt[0] + \"_Ctrl_adj\");\nselect -tgl $jnt ;\nparent;\nstring $sel[] = `ls -sl`;\nstring $obj;\nfor ($obj in $sel)\n{ \n    setAttr ($obj + \".translateX\") 0;\n    setAttr ($obj + \".translateY\") 0;\n    setAttr ($obj + \".translateZ\") 0;\n    setAttr ($obj + \".rotateX\") 0;\n\tsetAttr ($obj + \".rotateY\") 0;\n    setAttr ($obj + \".rotateZ\") 90; \n}\nparent -w ;\npickWalk -d down;\npickWalk -d down;" )
+        -mi "create only at Z" ( "$jnt = `ls - sl`;\n$rad = 1;\ncircle -n ($jnt[0] + \"_Ctrl\") -c 0 0 0 -nr 90 0 0 -sw 360 -r 1 -d 3 -ut 0 -tol 0.01 -s 8 -ch 1; objectMoveCommand;\ngroup -n ($jnt[0] + \"_Ctrl_auto\");\ngroup -n ($jnt[0] + \"_Ctrl_adj\");\nselect -tgl $jnt ;\nparent;\nstring $sel[] = `ls -sl`;\nstring $obj;\nfor ($obj in $sel)\n{ \n    setAttr ($obj + \".translateX\") 0;\n    setAttr ($obj + \".translateY\") 0;\n    setAttr ($obj + \".translateZ\") 0;\n    setAttr ($obj + \".rotateX\") 0;\n    setAttr ($obj + \".rotateY\") 90;\n}\nparent -w ;\npickWalk -d down;\npickWalk -d down;" )
+        -mi "OC all" ( "$jnt = `ls - sl`;\n$rad = 1;\ncircle -n ($jnt[0] + \"_Ctrl\") -c 0 0 0 -nr 90 0 0 -sw 360 -r 1 -d 3 -ut 0 -tol 0.01 -s 8 -ch 1; objectMoveCommand;\ngroup -n ($jnt[0] + \"_Ctrl_auto\");\ngroup -n ($jnt[0] + \"_Ctrl_adj\");\nselect -tgl $jnt ;\nparent;\nstring $sel[] = `ls -sl`;\nstring $obj;\nfor ($obj in $sel)\n{ \n    setAttr ($obj + \".translateX\") 0;\n    setAttr ($obj + \".translateY\") 0;\n    setAttr ($obj + \".translateZ\") 0;\n\tsetAttr ($obj + \".rotateX\") 0;\n    setAttr ($obj + \".rotateY\") 0;\n\tsetAttr ($obj + \".rotateZ\") 0;\n}\nparent -w ;\npickWalk -d down;\npickWalk -d down;\nselect -tgl $jnt ;\ndoCreateOrientConstraintArgList 1 { \"0\",\"0\",\"0\",\"0\",\"0\",\"0\",\"0\",\"1\",\"\",\"1\" } ;\norientConstraint -offset 0 0 0 -weight 1;" )
+        -mi "PC all" ( "$jnt = `ls - sl`;\n$rad = 1;\ncircle -n ($jnt[0] + \"_Ctrl\") -c 0 0 0 -nr 90 0 0 -sw 360 -r 1 -d 3 -ut 0 -tol 0.01 -s 8 -ch 1; objectMoveCommand;\ngroup -n ($jnt[0] + \"_Ctrl_auto\");\ngroup -n ($jnt[0] + \"_Ctrl_adj\");\nselect -tgl $jnt ;\nparent;\nstring $sel[] = `ls -sl`;\nstring $obj;\nfor ($obj in $sel)\n{ \n    setAttr ($obj + \".translateX\") 0;\n    setAttr ($obj + \".translateY\") 0;\n    setAttr ($obj + \".translateZ\") 0;\n    setAttr ($obj + \".rotateX\") 0;\n    setAttr ($obj + \".rotateY\") 0;\n\tsetAttr ($obj + \".rotateZ\") 0;\n}\nparent -w ;\npickWalk -d down;\npickWalk -d down;\nselect -tgl $jnt ;\ndoCreateParentConstraintArgList 1 { \"0\",\"0\",\"0\",\"0\",\"0\",\"0\",\"0\",\"1\",\"\",\"1\" } ;\nParentConstraint -offset 0 0 0 -weight 1;\n" )
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -flexibleWidthType 3
+        -flexibleWidthValue 32
+        -enable 1
+        -width 35
+        -height 34
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "group" 
+        -enableBackground 0
+        -backgroundColor 0 0 0 
+        -highlightColor 0.321569 0.521569 0.65098 
+        -align "center" 
+        -label "group" 
+        -labelOffset 0
+        -rotation 0
+        -flipX 0
+        -flipY 0
+        -useAlpha 1
+        -font "plainLabelFont" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.5 
+        -image "C:/Users/dell/Documents/maya/2019/prefs_old/icons/grp (2).png" 
+        -image1 "C:/Users/dell/Documents/maya/2019/prefs_old/icons/grp (2).png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "$obj1 = `ls -sl`;\ngroup -n ($obj1[0] + \"_offset\");\nadd -select c" 
+        -sourceType "mel" 
+        -doubleClickCommand "$obj1 = `ls -sl`;\ngroup -n ($obj1[0] + \"_auto\");\ngroup -n ($obj1[0] + \"_adj\");" 
+        -commandRepeatable 1
+        -flat 1
+        -mi "MatchPivot" ( "MatchPivots" )
+        -mi "null child" ( "$obj1 = `ls -sl`;\ngroup -n ($obj1[0] + \"_ctrl\");\nadd -select c\nparent;\nstring $sel[] = `ls -sl`;\nstring $obj;\nfor ($obj in $sel)\n{ \n    setAttr ($obj + \".translateX\") 0;\n    setAttr ($obj + \".translateY\") 0;\n    setAttr ($obj + \".translateZ\") 0;\n    setAttr ($obj + \".rotateX\") 0;\n    setAttr ($obj + \".rotateY\") 0;\n    setAttr ($obj + \".rotateZ\") 0; \n}" )
+        -mi "auto_grp" ( "$obj1 = `ls -sl`;\ngroup -n ($obj1[0] + \"_auto\");" )
+        -mi "offset_grp" ( "$obj1 = `ls -sl`;\ngroup -n ($obj1[0] + \"_offset\");\npickWalk -d right;" )
+    ;
+    separator
+        -enable 1
+        -width 12
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -enableBackground 0
+        -backgroundColor 0 0 0 
+        -highlightColor 0.321569 0.521569 0.65098 
+        -style "shelf" 
+        -horizontal 0
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -flexibleWidthType 3
+        -flexibleWidthValue 32
+        -enable 1
+        -width 35
+        -height 34
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Sets a keyframe on all channels that are selected." 
+        -enableBackground 0
+        -backgroundColor 0 0 0 
+        -highlightColor 0.321569 0.521569 0.65098 
+        -align "center" 
+        -label "Set Key" 
+        -labelOffset 0
+        -rotation 0
+        -flipX 0
+        -flipY 0
+        -useAlpha 1
+        -font "plainLabelFont" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.5 
+        -image "setKeyframe.png" 
+        -image1 "setKeyframe.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "doSetKeyframeArgList 7 { \"1\",\"0\",\"1\",\"0\",\"1\",\"0\",\"0\",\"animationList\",\"0\",\"0\",\"0\",\"0\" };" 
+        -sourceType "mel" 
+        -commandRepeatable 1
+        -flat 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -flexibleWidthType 3
+        -flexibleWidthValue 32
+        -enable 1
+        -width 35
+        -height 34
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Adjust blend shape weights" 
+        -enableBackground 0
+        -backgroundColor 0 0 0 
+        -highlightColor 0.321569 0.521569 0.65098 
+        -align "center" 
+        -label "Shape Editor" 
+        -labelOffset 0
+        -rotation 0
+        -flipX 0
+        -flipY 0
+        -useAlpha 1
+        -font "plainLabelFont" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.5 
+        -image "blendShapeEditor.png" 
+        -image1 "blendShapeEditor.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "ShapeEditor" 
+        -sourceType "mel" 
+        -doubleClickCommand "PoseEditor" 
+        -commandRepeatable 1
+        -flat 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -flexibleWidthType 3
+        -flexibleWidthValue 32
+        -enable 1
+        -width 35
+        -height 34
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Set the keyable state of attributes of the selected object(s)" 
+        -enableBackground 0
+        -backgroundColor 0 0 0 
+        -highlightColor 0.321569 0.521569 0.65098 
+        -align "center" 
+        -label "Channel Control" 
+        -labelOffset 0
+        -rotation 0
+        -flipX 0
+        -flipY 0
+        -useAlpha 1
+        -font "plainLabelFont" 
+        -imageOverlayLabel "CC" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.5 
+        -image "menuIconWindow.png" 
+        -image1 "menuIconWindow.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "ChannelControlEditor" 
+        -sourceType "mel" 
+        -commandRepeatable 1
+        -flat 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -flexibleWidthType 3
+        -flexibleWidthValue 32
+        -enable 1
+        -width 35
+        -height 34
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "weightHammerVerts;" 
+        -enableBackground 0
+        -backgroundColor 0 0 0 
+        -highlightColor 0.321569 0.521569 0.65098 
+        -align "center" 
+        -label "weightHammerVerts;" 
+        -labelOffset 0
+        -rotation 0
+        -flipX 0
+        -flipY 0
+        -useAlpha 1
+        -font "plainLabelFont" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.5 
+        -image "weightHammer.png" 
+        -image1 "weightHammer.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "weightHammerVerts;" 
+        -sourceType "mel" 
+        -commandRepeatable 1
+        -flat 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -flexibleWidthType 3
+        -flexibleWidthValue 32
+        -enable 1
+        -width 35
+        -height 34
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Playblast options" 
+        -enableBackground 0
+        -backgroundColor 0 0 0 
+        -highlightColor 0.321569 0.521569 0.65098 
+        -align "center" 
+        -label "playblastDialogItem" 
+        -labelOffset 0
+        -rotation 0
+        -flipX 0
+        -flipY 0
+        -useAlpha 1
+        -font "plainLabelFont" 
+        -imageOverlayLabel "Po" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.5 
+        -image "menuIconWindow.png" 
+        -image1 "menuIconWindow.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "PlayblastOptions" 
+        -sourceType "mel" 
+        -commandRepeatable 1
+        -flat 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -flexibleWidthType 3
+        -flexibleWidthValue 32
+        -enable 1
+        -width 35
+        -height 34
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "GrowPolygonSelectionRegion;" 
+        -enableBackground 0
+        -backgroundColor 0 0 0 
+        -highlightColor 0.321569 0.521569 0.65098 
+        -align "center" 
+        -label "grow" 
+        -labelOffset 0
+        -rotation 0
+        -flipX 0
+        -flipY 0
+        -useAlpha 1
+        -font "plainLabelFont" 
+        -imageOverlayLabel "grow" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.5 
+        -image "commandButton.png" 
+        -image1 "commandButton.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "GrowPolygonSelectionRegion;" 
+        -sourceType "mel" 
+        -commandRepeatable 1
+        -flat 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -flexibleWidthType 3
+        -flexibleWidthValue 32
+        -enable 1
+        -width 35
+        -height 34
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "artSkinSetSelectionValue 1 false artAttrSkinPaintCtx artAttrSkin;" 
+        -enableBackground 0
+        -backgroundColor 0 0 0 
+        -highlightColor 0.321569 0.521569 0.65098 
+        -align "center" 
+        -label "flood" 
+        -labelOffset 0
+        -rotation 0
+        -flipX 0
+        -flipY 0
+        -useAlpha 1
+        -font "plainLabelFont" 
+        -imageOverlayLabel "flood" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.5 
+        -image "commandButton.png" 
+        -image1 "commandButton.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "artSkinSetSelectionValue 0 false artAttrSkinPaintCtx artAttrSkin;" 
+        -sourceType "mel" 
+        -doubleClickCommand "artSkinSetSelectionValue 1 false artAttrSkinPaintCtx artAttrSkin;" 
+        -commandRepeatable 1
+        -flat 1
+        -mi "0" ( "artSkinSetSelectionValue 0.0 false artAttrSkinPaintCtx artAttrSkin;" )
+        -mi ".1" ( "artSkinSetSelectionValue 0.1 false artAttrSkinPaintCtx artAttrSkin;" )
+        -mi ".125" ( "artSkinSetSelectionValue 0.125 false artAttrSkinPaintCtx artAttrSkin;" )
+        -mi ".15" ( "artSkinSetSelectionValue 0.15 false artAttrSkinPaintCtx artAttrSkin;" )
+        -mi ".175" ( "artSkinSetSelectionValue 0.175 false artAttrSkinPaintCtx artAttrSkin;" )
+        -mi ".2" ( "artSkinSetSelectionValue 0.2 false artAttrSkinPaintCtx artAttrSkin;" )
+        -mi ".25" ( "artSkinSetSelectionValue 0.25 false artAttrSkinPaintCtx artAttrSkin;" )
+        -mi ".3" ( "artSkinSetSelectionValue 0.3 false artAttrSkinPaintCtx artAttrSkin;" )
+        -mi ".5" ( "artSkinSetSelectionValue 0.5 false artAttrSkinPaintCtx artAttrSkin;" )
+        -mi ".55" ( "print(\"User defined menuItem\");" )
+        -mi ".6" ( "artSkinSetSelectionValue 0.55 false artAttrSkinPaintCtx artAttrSkin;" )
+        -mi ".7" ( "artSkinSetSelectionValue 0.7 false artAttrSkinPaintCtx artAttrSkin;" )
+        -mi ".8" ( "artSkinSetSelectionValue 0.8 false artAttrSkinPaintCtx artAttrSkin;" )
+        -mi ".85" ( "artSkinSetSelectionValue 0.85 false artAttrSkinPaintCtx artAttrSkin;" )
+        -mi ".9" ( "artSkinSetSelectionValue 0.9 false artAttrSkinPaintCtx artAttrSkin;" )
+        -mi ".95" ( "artSkinSetSelectionValue 0.95 false artAttrSkinPaintCtx artAttrSkin;" )
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -flexibleWidthType 3
+        -flexibleWidthValue 32
+        -enable 1
+        -width 35
+        -height 34
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "artAttrPaintOperation artAttrSkinPaintCtx Smooth;\nartSkinSetSelectionValue 1 false artAttrSkinPaintCtx artAttrSkin;" 
+        -enableBackground 0
+        -backgroundColor 0 0 0 
+        -highlightColor 0.321569 0.521569 0.65098 
+        -align "center" 
+        -label "smooth flood" 
+        -labelOffset 0
+        -rotation 0
+        -flipX 0
+        -flipY 0
+        -useAlpha 1
+        -font "plainLabelFont" 
+        -imageOverlayLabel "smooth flood" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.5 
+        -image "commandButton.png" 
+        -image1 "commandButton.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "artAttrPaintOperation artAttrSkinPaintCtx Smooth;\nartSkinSetSelectionValue 1 false artAttrSkinPaintCtx artAttrSkin;" 
+        -sourceType "mel" 
+        -commandRepeatable 1
+        -flat 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -flexibleWidthType 3
+        -flexibleWidthValue 32
+        -enable 1
+        -width 35
+        -height 34
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "channelBoxCommand -lock\nchannelBoxCommand -unlock\n" 
+        -enableBackground 0
+        -backgroundColor 0 0 0 
+        -highlightColor 0.321569 0.521569 0.65098 
+        -align "center" 
+        -label "lock unlock" 
+        -labelOffset 0
+        -rotation 0
+        -flipX 0
+        -flipY 0
+        -useAlpha 1
+        -font "plainLabelFont" 
+        -imageOverlayLabel "lock unlock" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.5 
+        -image "commandButton.png" 
+        -image1 "commandButton.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "channelBoxCommand -lock\n" 
+        -sourceType "mel" 
+        -doubleClickCommand "channelBoxCommand -unlock" 
+        -commandRepeatable 1
+        -flat 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -flexibleWidthType 3
+        -flexibleWidthValue 32
+        -enable 1
+        -width 35
+        -height 34
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "User Script" 
+        -enableBackground 0
+        -backgroundColor 0 0 0 
+        -highlightColor 0.321569 0.521569 0.65098 
+        -align "center" 
+        -label "User Script" 
+        -labelOffset 0
+        -rotation 0
+        -flipX 0
+        -flipY 0
+        -useAlpha 1
+        -font "plainLabelFont" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.5 
+        -image "commandButton.png" 
+        -image1 "commandButton.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "setAttr group.visibility 0" 
+        -sourceType "mel" 
+        -doubleClickCommand "setAttr group.visibility 1" 
+        -commandRepeatable 1
+        -flat 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -flexibleWidthType 3
+        -flexibleWidthValue 32
+        -enable 1
+        -width 35
+        -height 34
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Deform objects by having their surfaces follow the shape of a curve." 
+        -enableBackground 0
+        -backgroundColor 0 0 0 
+        -highlightColor 0.321569 0.521569 0.65098 
+        -align "center" 
+        -label "Wire" 
+        -labelOffset 0
+        -rotation 0
+        -flipX 0
+        -flipY 0
+        -useAlpha 1
+        -font "plainLabelFont" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.5 
+        -image "wire.png" 
+        -image1 "wire.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "WireTool" 
+        -sourceType "mel" 
+        -commandRepeatable 1
+        -flat 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -flexibleWidthType 3
+        -flexibleWidthValue 32
+        -enable 1
+        -width 35
+        -height 34
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Deform objects by modifying a mesh that surrounds them." 
+        -enableBackground 0
+        -backgroundColor 0 0 0 
+        -highlightColor 0.321569 0.521569 0.65098 
+        -align "center" 
+        -label "Wrap" 
+        -labelOffset 0
+        -rotation 0
+        -flipX 0
+        -flipY 0
+        -useAlpha 1
+        -font "plainLabelFont" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.5 
+        -image "wrap.png" 
+        -image1 "wrap.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "CreateWrap" 
+        -sourceType "mel" 
+        -commandRepeatable 1
+        -flat 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -flexibleWidthType 3
+        -flexibleWidthValue 32
+        -enable 1
+        -width 35
+        -height 34
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Edit various component values for the selected object(s)" 
+        -enableBackground 0
+        -backgroundColor 0 0 0 
+        -highlightColor 0.321569 0.521569 0.65098 
+        -align "center" 
+        -label "Component Editor" 
+        -labelOffset 0
+        -rotation 0
+        -flipX 0
+        -flipY 0
+        -useAlpha 1
+        -font "plainLabelFont" 
+        -imageOverlayLabel "CpEd" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.5 
+        -image "menuIconWindow.png" 
+        -image1 "menuIconWindow.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "ComponentEditor" 
+        -sourceType "mel" 
+        -commandRepeatable 1
+        -flat 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -flexibleWidthType 3
+        -flexibleWidthValue 32
+        -enable 1
+        -width 35
+        -height 34
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Edit which vertices will be affected by a specific deformer." 
+        -enableBackground 0
+        -backgroundColor 0 0 0 
+        -highlightColor 0.321569 0.521569 0.65098 
+        -align "center" 
+        -label "Edit Membership Tool" 
+        -labelOffset 0
+        -rotation 0
+        -flipX 0
+        -flipY 0
+        -useAlpha 1
+        -font "plainLabelFont" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.5 
+        -image "setEdit.png" 
+        -image1 "setEdit.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "EditMembershipTool" 
+        -sourceType "mel" 
+        -commandRepeatable 1
+        -flat 1
+    ;
+
+} 
